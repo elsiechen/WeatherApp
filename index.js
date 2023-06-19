@@ -36,8 +36,23 @@ async function fetchWeather(location) {
         document.querySelector('.wind').innerHTML = `${getData.current.wind_kph
         } km/h`;
         
+        uvInfo();
+        
     } catch(err) {
         console.log(err);
+    }
+}
+
+function uvInfo() {
+    // uv info
+    let uvIndex = parseInt(document.querySelector('.uv').innerHTML);
+    let uvInfo = document.querySelector('.uvInfo');
+    if(uvIndex >= 0 && uvIndex <= 2) {
+        uvInfo.innerHTML = 'Low: No protection needed. You can safely stay outside using minimal sun protection.';
+    } else if(uvIndex >= 3 && uvIndex <= 7) {
+        uvInfo.innerHTML = 'Moderate to High: Protection needed. When outside, generously apply broad-spectrum SPF-15 or higher sunscreen on exposed skin, and wear protective clothing, a wide-brimmed hat, and sunglasses.';
+    } else {
+        uvInfo.innerHTML = 'Very High to Extreme: Extra protection needed. Be careful outside, seek shade and wear protective clothing, a wide-brimmed hat, and sunglasses, and generously apply a minimum of  SPF-15, broad-spectrum sunscreen on exposed skin.';
     }
 }
 

@@ -10,6 +10,66 @@ body {
     background-size: cover;
 }
 
+.container {
+    padding: 2rem 2rem;
+}
+
+.current {
+    display: flex;
+    justify-content: space-around;
+}
+/* left */
+.city {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.date {
+    font-size: 1.5rem;
+}
+
+.description {
+    font-size: 1.5rem;
+}
+
+.temp {
+    margin-top: 1rem;
+    font-size: 3.5rem;
+    font-weight: bolder;
+}
+
+.weatherIcon {
+    width: 7rem;
+}
+/* right */
+.right,
+.info,
+.label {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.info,
+.label {
+    gap: 5px;
+}
+
+.label {
+    flex-direction: row;
+}
+
+.feel,
+.humidity,
+.uvContainer,
+.wind {
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+
 .uvContainer {
     position: relative;
     display: inline-block;
@@ -19,10 +79,10 @@ body {
     visibility: hidden;
     background-color: white;
     color: black;
-    border: 1px solid black;
+    font-size: 0.3rem;
     border-radius: 5px;
     padding: 5px;
-    text-align: center;
+    width: 150px;
     position: absolute;
     z-index: 1;
     top: -5px;
@@ -36,3 +96,41 @@ body {
 img[src="info.png"]:hover {
     cursor: pointer;
 }
+
+img[src="season.png"] {
+    width: 70px;
+    height: 70px;
+}
+
+img[src="hot.png"],
+img[src="humidity.png"],
+img[src="uv.png"],
+img[src="wind.png"] {
+    width: 24px;
+    height: 24px;
+}
+.searchContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+#locationInput {
+    width: 150px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.subContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+

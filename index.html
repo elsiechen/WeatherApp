@@ -9,13 +9,17 @@
 </head>
 <body>
     <div class="container">
-        <form novalidate>
-            <label for="location">Enter location to get weather information:</label>
-            <input type="text" id="locationInput" required>
-            <button type="button" id="weatherBtn">Submit</button>
-            <span class="inputError"></span>
-            <span class="searchError"></span>
-        </form>
+        <div class="searchContainer">
+            <img src="weather-news.png" alt="">
+            <form novalidate>
+                <div class="subContainer">
+                    <input type="text" id="locationInput" required placeholder="Location">
+                    <span><img src="search.png" id="weatherBtn"></span>
+                </div>
+                <div class="inputError"></div>
+                <div class="searchError"></div>
+            </form>
+        </div>
         <div class="current">
             <div class="left">
                 <div class="city"></div>
@@ -47,7 +51,7 @@
                     <div class="uvContainer">
                         <span class="uv"></span>
                         <img src="info.png" alt="">
-                        <span class="uvInfo">Safe</span>
+                        <div class="uvInfo">safe</div>
                     </div>
                 </div>
                 <div class="info">
