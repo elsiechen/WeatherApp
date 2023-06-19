@@ -1,7 +1,7 @@
 const weatherBtn = document.querySelector('#weatherBtn');
 weatherBtn.addEventListener('click', () => {
     let locationInput = document.querySelector('#locationInput');
-    let errorField = document.querySelector('.error');
+    let errorField = document.querySelector('.inputError');
 
     // Form validation
     errorField.textContent = '';
@@ -22,7 +22,21 @@ async function fetchWeather(location) {
             throw Error(getData.error.message);
         };
         console.log(getData);
-        console.log(typeof getData);
+        // Render current
+        document.querySelector('.city').innerHTML = `${ getData.location.name }, ${getData.location.country}`;
+        document.querySelector('.date').innerHTML = getData.location.localtime;
+        document.querySelector('.description').innerHTML = getData.current.condition.text;
+        document.querySelector('.temp_c').innerHTML = `${ getData.current.temp_c } &#8451;`;
+        document.querySelector('.temp_f').innerHTML = `${ getData.current.temp_f } &#8457;`;
+        document.querySelector('.weatherIcon').src = getData.current.condition.icon;
+        
+        document.querySelector('.feel_c').innerHTML = `${ getData.current.feelslike_c } &#8451;`;
+        document.querySelector('.feel_f').innerHTML = `${ getData.current.feelslike_f } &#8457;`;
+        document.querySelector('.humidity').innerHTML = `${ getData.current.humidity } %`;
+        document.querySelector('.uv').innerHTML = getData.current.uv;
+        document.querySelector('.wind').innerHTML = `${getData.current.wind_kph
+        } km/h`;
+        
     } catch(err) {
         console.log(err);
     }
