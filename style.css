@@ -77,16 +77,18 @@ body {
 
 .uvInfo {
     visibility: hidden;
-    background-color: white;
+    background-color: rgba(255,255,255,0.9);
     color: black;
-    font-size: 0.3rem;
+    font-size: 12px;
+    font-weight: 100;
     border-radius: 5px;
     padding: 5px;
     width: 150px;
     position: absolute;
     z-index: 1;
-    top: -5px;
-    left: 105%;
+    top: 25px;
+    left: -120%;
+
 }
 
 .uvContainer:hover .uvInfo {
@@ -133,4 +135,17 @@ img[src="wind.png"] {
     gap: 1rem;
 }
 
+#weatherBtn {
+    cursor: pointer;
+}
 
+.inputError,
+.searchError {
+    height: 1rem;
+    color: red;
+    font-weight: bold;
+}
+
+.label span {
+    font-weight: bold;
+}

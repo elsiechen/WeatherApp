@@ -2,9 +2,11 @@ const weatherBtn = document.querySelector('#weatherBtn');
 weatherBtn.addEventListener('click', () => {
     let locationInput = document.querySelector('#locationInput');
     let errorField = document.querySelector('.inputError');
+    let searchField = document.querySelector('.searchError');
 
     // Form validation
     errorField.textContent = '';
+    searchField.textContent = '';
     if (locationInput.validity.valueMissing) {
         errorField.textContent = 'You need to enter something to search for.';
         return;
@@ -40,6 +42,7 @@ async function fetchWeather(location) {
         
     } catch(err) {
         console.log(err);
+        document.querySelector('.searchError').innerHTML = err;
     }
 }
 
