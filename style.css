@@ -8,6 +8,7 @@ body {
     background-image: url('beach.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100vh;
 }
 
 .container {
@@ -148,4 +149,34 @@ img[src="wind.png"] {
 
 .label span {
     font-weight: bold;
+}
+
+/* hour */
+.hourContainer {
+    display: flex;
+    width: 80vw;
+    overflow: auto;
+}
+
+.hourSubContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.hour {
+
+}
+
+.weatherImg {
+
+}
+
+.chanceOfRain {
+
+}
+
+.hourTemp {
+
 }

@@ -17,7 +17,7 @@ weatherBtn.addEventListener('click', () => {
 
 async function fetchWeather(location) {
     try {
-        const url = `https://api.weatherapi.com/v1/current.json?key=0f44ee531494426cb6b20040231306&q=${location}`;
+        const url = `https://api.weatherapi.com/v1/forecast.json?key=0f44ee531494426cb6b20040231306&q=${location}`;
         const response = await fetch(url);
         const getData = await response.json();
         if (getData.error) {
@@ -40,6 +40,39 @@ async function fetchWeather(location) {
         
         uvInfo();
         
+        // Render hour
+        const hourArray = getData['forecast']['forecastday'][0]['hour'];
+        const hourContainer = document.querySelector('.hourContainer');
+        const nowHour = getHour(getData.location.localtime);
+
+        for (let i in hourArray) {
+            const displayHour = getHour(hourArray[i].time);
+            if(nowHour <= displayHour) {
+                const hourSubContainer = document.createElement('div');
+                const hour = document.createElement('div');
+                const weatherImg = document.createElement('img');
+                const chanceOfRain = document.createElement('div');
+                const hourTemp = document.createElement('div');
+                
+                hourSubContainer.classList.add('hourSubContainer');
+                hour.classList.add('hour');
+                weatherImg.classList.add('weatherImg');
+                chanceOfRain.classList.add('chanceOfRain');
+                hourTemp.classList.add('hourTemp');
+
+                hour.innerHTML = converter(displayHour);
+                weatherImg.src = hourArray[i].condition.icon;
+                chanceOfRain.innerHTML = hourArray[i].chance_of_rain === 0 ?
+                     '' : `${ hourArray[i].chance_of_rain } %`;
+                hourTemp.innerHTML = `${ hourArray[i].temp_c } &#8451;`;
+
+                hourSubContainer.appendChild(hour);
+                hourSubContainer.appendChild(weatherImg);
+                hourSubContainer.appendChild(chanceOfRain);
+                hourSubContainer.appendChild(hourTemp);
+                hourContainer.appendChild(hourSubContainer);
+            }
+        }
     } catch(err) {
         console.log(err);
         document.querySelector('.searchError').innerHTML = err;
@@ -51,12 +84,22 @@ function uvInfo() {
     let uvIndex = parseInt(document.querySelector('.uv').innerHTML);
     let uvInfo = document.querySelector('.uvInfo');
     if(uvIndex >= 0 && uvIndex <= 2) {
-        uvInfo.innerHTML = 'Low: No protection needed. You can safely stay outside using minimal sun protection.';
+        uvInfo.innerHTML = '<strong>Low</strong>: <br> No protection needed. You can safely stay outside using minimal sun protection.';
     } else if(uvIndex >= 3 && uvIndex <= 7) {
-        uvInfo.innerHTML = 'Moderate to High: Protection needed. When outside, generously apply broad-spectrum SPF-15 or higher sunscreen on exposed skin, and wear protective clothing, a wide-brimmed hat, and sunglasses.';
+        uvInfo.innerHTML = '<strong>Moderate to High</strong>: <br> Protection needed. When outside, generously apply broad-spectrum SPF-15 or higher sunscreen on exposed skin, and wear protective clothing, a wide-brimmed hat, and sunglasses.';
     } else {
-        uvInfo.innerHTML = 'Very High to Extreme: Extra protection needed. Be careful outside, seek shade and wear protective clothing, a wide-brimmed hat, and sunglasses, and generously apply a minimum of  SPF-15, broad-spectrum sunscreen on exposed skin.';
+        uvInfo.innerHTML = '<strong>Very High to Extreme</strong>: <br> Extra protection needed. Be careful outside, seek shade and wear protective clothing, a wide-brimmed hat, and sunglasses, and generously apply a minimum of  SPF-15, broad-spectrum sunscreen on exposed skin.';
     }
 }
 
+function getHour(time) {
+    const array = time.split(' ');
+    const hour = array[1].slice(0,2);
+    return hour;
+}
+
+function converter(time) {
+    if(time < 12) return `${ time } am`;
+    else return `${ time } pm`;
+}
 fetchWeather('taipei');
