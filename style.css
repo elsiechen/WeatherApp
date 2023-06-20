@@ -202,16 +202,16 @@ img[src="wind.png"] {
     font-weight: bolder;
 }
 
-.toggleContainer {
-    position: relative;
-    /* width: 100vw; */
+.toggle {
+    font-size: 0.5rem;
+    width: 6rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: transparent;
 }
 
-.toggle {
-    position: absolute;
-    display: inline;
-    top: 0;
-    right: -200;
+.toggle:hover {
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {

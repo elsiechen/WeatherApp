@@ -119,17 +119,21 @@ function tempConverter(temp) {
         return `${ fahrenheit } ℉`;
     } else {
         let celsius = ((parseFloat(number) - 32) * 5 / 9).toFixed(1);
-        console.log(celsius)
         // let rounded = celsius.toFixed(1);
         return `${ celsius } ℃`;
     }
 }
 
 function toggleTemp() {
+    let toggleBtn = document.querySelector('.toggle');
     let temp = document.querySelector('.temp');
     let feel = document.querySelector('.feel');
     let hourTemps = document.querySelectorAll('.hourTemp');
     
+    // toggle text of display button
+    toggleBtn.innerHTML = toggleBtn.innerHTML === 'Display Fahrenheit'?
+        'Display Celsius' : 'Display Fahrenheit';
+    // toggle temperature
     temp.innerHTML = tempConverter(temp.innerHTML);
     feel.innerHTML = tempConverter(feel.innerHTML);
     hourTemps.forEach(hourTemp => {
