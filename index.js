@@ -67,9 +67,9 @@ async function fetchWeather(location) {
                 hourTemp.innerHTML = `${ hourArray[i].temp_c } &#8451;`;
 
                 hourSubContainer.appendChild(hour);
+                hourSubContainer.appendChild(hourTemp);
                 hourSubContainer.appendChild(weatherImg);
                 hourSubContainer.appendChild(chanceOfRain);
-                hourSubContainer.appendChild(hourTemp);
                 hourContainer.appendChild(hourSubContainer);
             }
         }
