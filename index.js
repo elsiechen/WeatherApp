@@ -23,22 +23,20 @@ async function fetchWeather(location) {
         const url = `https://api.weatherapi.com/v1/forecast.json?key=0f44ee531494426cb6b20040231306&q=${location}`;
         const response = await fetch(url);
         const getData = await response.json();
+
         if (getData.error) {
             throw Error(getData.error.message);
         };
-        console.log(getData);
+
         // Render current
         document.querySelector('.city').innerHTML = `${ getData.location.name }, ${getData.location.country}`;
         document.querySelector('.date').innerHTML = getData.location.localtime;
         document.querySelector('.description').innerHTML = getData.current.condition.text;
         document.querySelector('.temp').innerHTML = `${ getData.current.temp_c }.0 &#8451;`;
+        
         // document.querySelector('.temp_f').innerHTML = `${ getData.current.temp_f } &#8457;`;
         document.querySelector('.weatherIcon').src = getData.current.condition.icon;
         
-        const f = tempConverter(document.querySelector('.temp').innerHTML);
-        console.log(f);
-        console.log(getData.current.temp_f)
-
         document.querySelector('.feel').innerHTML = `${ getData.current.feelslike_c } &#8451;`;
         document.querySelector('.humidity').innerHTML = `${ getData.current.humidity } %`;
         document.querySelector('.uv').innerHTML = getData.current.uv;
@@ -50,7 +48,7 @@ async function fetchWeather(location) {
         // Render hour
         const hourArray = getData['forecast']['forecastday'][0]['hour'];
         const hourContainer = document.querySelector('.hourContainer');
-        const nowHour = getHour(getData.location.localtime);
+        const nowHour = getHour(getData.current.last_updated);
 
         for (let i in hourArray) {
             const displayHour = getHour(hourArray[i].time);
@@ -106,7 +104,8 @@ function getHour(time) {
 }
 
 function converter(time) {
-    if(time < 12) return `${ time } am`;
+    if(time <= 9) return `${ time.slice(1) } am`;
+    else if(time == 10 || time == 11) return `${ time } am`;
     else return `${ time } pm`;
 }
 
@@ -115,7 +114,6 @@ function tempConverter(temp) {
     // degree of Celsius
     if(temp.includes('℃')) {
         let fahrenheit = (parseFloat(number)* 9 / 5 + 32).toFixed(1);
-        console.log(fahrenheit)
         return `${ fahrenheit } ℉`;
     } else {
         let celsius = ((parseFloat(number) - 32) * 5 / 9).toFixed(1);
