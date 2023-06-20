@@ -25,7 +25,7 @@ async function fetchWeather(location) {
         const url = `https://api.weatherapi.com/v1/forecast.json?key=0f44ee531494426cb6b20040231306&q=${location}`;
         const response = await fetch(url);
         const getData = await response.json();
-
+        
         if (getData.error) {
             throw Error(getData.error.message);
         };
@@ -49,7 +49,9 @@ async function fetchWeather(location) {
         const hourArray = getData['forecast']['forecastday'][0]['hour'];
         const hourContainer = document.querySelector('.hourContainer');
         const nowHour = getHour(getData.current.last_updated);
-
+        // Clear content in hourContainer
+        hourContainer.innerHTML = '';
+        
         for (let i in hourArray) {
             const displayHour = getHour(hourArray[i].time);
             if(nowHour <= displayHour) {
