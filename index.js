@@ -1,4 +1,7 @@
 const weatherBtn = document.querySelector('#weatherBtn');
+const toggleBtn = document.querySelector('.toggle');
+
+toggleBtn.addEventListener('click', toggleTemp);
 weatherBtn.addEventListener('click', () => {
     let locationInput = document.querySelector('#locationInput');
     let errorField = document.querySelector('.inputError');
@@ -28,10 +31,14 @@ async function fetchWeather(location) {
         document.querySelector('.city').innerHTML = `${ getData.location.name }, ${getData.location.country}`;
         document.querySelector('.date').innerHTML = getData.location.localtime;
         document.querySelector('.description').innerHTML = getData.current.condition.text;
-        document.querySelector('.temp').innerHTML = `${ getData.current.temp_c } &#8451;`;
+        document.querySelector('.temp').innerHTML = `${ getData.current.temp_c }.0 &#8451;`;
         // document.querySelector('.temp_f').innerHTML = `${ getData.current.temp_f } &#8457;`;
         document.querySelector('.weatherIcon').src = getData.current.condition.icon;
         
+        const f = tempConverter(document.querySelector('.temp').innerHTML);
+        console.log(f);
+        console.log(getData.current.temp_f)
+
         document.querySelector('.feel').innerHTML = `${ getData.current.feelslike_c } &#8451;`;
         document.querySelector('.humidity').innerHTML = `${ getData.current.humidity } %`;
         document.querySelector('.uv').innerHTML = getData.current.uv;
@@ -102,4 +109,32 @@ function converter(time) {
     if(time < 12) return `${ time } am`;
     else return `${ time } pm`;
 }
+
+function tempConverter(temp) {
+    const number = temp.slice(0,4);
+    // degree of Celsius
+    if(temp.includes('℃')) {
+        let fahrenheit = (parseFloat(number)* 9 / 5 + 32).toFixed(1);
+        console.log(fahrenheit)
+        return `${ fahrenheit } ℉`;
+    } else {
+        let celsius = ((parseFloat(number) - 32) * 5 / 9).toFixed(1);
+        console.log(celsius)
+        // let rounded = celsius.toFixed(1);
+        return `${ celsius } ℃`;
+    }
+}
+
+function toggleTemp() {
+    let temp = document.querySelector('.temp');
+    let feel = document.querySelector('.feel');
+    let hourTemps = document.querySelectorAll('.hourTemp');
+    
+    temp.innerHTML = tempConverter(temp.innerHTML);
+    feel.innerHTML = tempConverter(feel.innerHTML);
+    hourTemps.forEach(hourTemp => {
+        hourTemp.innerHTML = tempConverter(hourTemp.innerHTML);
+    })
+}
+
 fetchWeather('taipei');
