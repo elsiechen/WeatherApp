@@ -33,8 +33,6 @@ async function fetchWeather(location) {
         document.querySelector('.date').innerHTML = getData.location.localtime;
         document.querySelector('.description').innerHTML = getData.current.condition.text;
         document.querySelector('.temp').innerHTML = `${ getData.current.temp_c }.0 &#8451;`;
-        
-        // document.querySelector('.temp_f').innerHTML = `${ getData.current.temp_f } &#8457;`;
         document.querySelector('.weatherIcon').src = getData.current.condition.icon;
         
         document.querySelector('.feel').innerHTML = `${ getData.current.feelslike_c } &#8451;`;

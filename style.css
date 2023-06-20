@@ -5,7 +5,7 @@
 }
 
 body {
-    background-image: url('beach.jpeg');
+    background-image: url('img/beach.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
@@ -165,7 +165,7 @@ img[src="wind.png"] {
 /* hour */
 .hourContainer {
     display: flex;
-    width: 80vw;
+    width: 70vw;
     height: 20vh;
     overflow: auto;
     justify-content: center;
@@ -260,5 +260,15 @@ img[src="wind.png"] {
     .wind {
         font-size: 1rem;
         font-weight: bold;
+    }
+
+    img[src="weather-news.png"] {
+        width: 5rem;
+    }
+
+    .toggle {
+        font-size: 3px;
+        width: auto;
+        padding: 2px 5px;
     }
 }
