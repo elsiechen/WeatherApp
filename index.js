@@ -2,7 +2,10 @@ const weatherBtn = document.querySelector('#weatherBtn');
 const toggleBtn = document.querySelector('.toggle');
 
 toggleBtn.addEventListener('click', toggleTemp);
-weatherBtn.addEventListener('click', () => {
+weatherBtn.addEventListener('click',searchWeather);
+
+fetchWeather('taipei');
+function searchWeather() {
     let locationInput = document.querySelector('#locationInput');
     let errorField = document.querySelector('.inputError');
     let searchField = document.querySelector('.searchError');
@@ -16,8 +19,7 @@ weatherBtn.addEventListener('click', () => {
     }
     // Fetch data
     fetchWeather(locationInput.value);
-});
-
+}
 async function fetchWeather(location) {
     try {
         const url = `https://api.weatherapi.com/v1/forecast.json?key=0f44ee531494426cb6b20040231306&q=${location}`;
@@ -119,7 +121,6 @@ function tempConverter(temp) {
         return `${ celsius } ℃`;
     }
 }
-
 function toggleTemp() {
     let toggleBtn = document.querySelector('.toggle');
     let temp = document.querySelector('.temp');
@@ -136,5 +137,3 @@ function toggleTemp() {
         hourTemp.innerHTML = tempConverter(hourTemp.innerHTML);
     })
 }
-
-fetchWeather('taipei');
