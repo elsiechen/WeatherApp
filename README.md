@@ -28,6 +28,7 @@ Check out the [**live**](https://elsiechen.github.io/WeatherApp/) demo.
 - Toggle displaying the data in Fahrenheit or Celsius.This allows users to choose their preferred unit of measurement and improves accessibility.
 - Display different warning information based on data for uv index while hovering over the info image. This provides helpful information and improves the user experience.
 - Form validation with JavaScript using constraint validation API to ensure that user input meets the required criteria. 
+- Responsive Web Design using flexbox and media query
 
 ## Credits
 
