@@ -107,8 +107,8 @@ function getHour(time) {
 
 function converter(time) {
     if(time <= 9) return `${ time.slice(1) } am`;
-    else if(time == 10 || time == 11) return `${ time } am`;
-    else return `${ time } pm`;
+    else if(time == 10 || time == 11 || time == 12) return `${ time } am`;
+    else return `${ time - 12 } pm`;
 }
 
 function tempConverter(temp) {
